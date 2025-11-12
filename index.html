@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оазис спокойствия</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e6f7ff 0%, #f0f9eb 100%);
+            color: #2c3e50;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 300;
+            color: #3498db;
+        }
+
+        .logo span {
+            font-weight: 600;
+            color: #2ecc71;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: #3498db;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #3498db;
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="%233498db" stroke-width="0.5" opacity="0.2"/></svg>');
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            z-index: -1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-weight: 300;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #7f8c8d;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeIn 2s ease;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            animation: fadeIn 2.5s ease;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: #3498db;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            width: 300px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: #3498db;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .feature-card p {
+            color: #7f8c8d;
+        }
+
+        .meditation-section {
+            background: rgba(52, 152, 219, 0.05);
+            position: relative;
+        }
+
+        .meditation-container {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+
+        .meditation-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .meditation-visual {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .breathing-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: breathe 8s infinite ease-in-out;
+        }
+
+        .inner-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+        }
+
+        .quote-section {
+            text-align: center;
+            background: #2c3e50;
+            color: white;
+        }
+
+        .quote {
+            font-size: 1.8rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .author {
+            font-size: 1.2rem;
+            color: #bdc3c7;
+        }
+
+        .techniques {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .technique-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 350px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .technique-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .technique-img {
+            height: 200px;
+            background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .technique-content {
+            padding: 25px;
+        }
+
+        .technique-content h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .technique-content p {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: #3498db;
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: #3498db;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes breathe {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Оазис <span>Спокойствия</span></div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#about">О спокойствии</a></li>
+                        <li><a href="#meditation">Медитация</a></li>
+                        <li><a href="#techniques">Техники</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Найдите свой внутренний покой</h1>
+                <p>Откройте для себя простые и эффективные методы обретения спокойствия в повседневной жизни. Научитесь управлять стрессом и находить гармонию в себе.</p>
+                <a href="#meditation" class="btn">Начать медитацию</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">Путь к спокойствию</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">☁️</div>
+                    <h3>Дыхательные практики</h3>
+                    <p>Простые техники дыхания, которые помогут успокоить ум и снизить уровень стресса за несколько минут.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌿</div>
+                    <h3>Природа и гармония</h3>
+                    <p>Связь с природой как источник внутреннего равновесия и вдохновения для обретения спокойствия.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Осознанность</h3>
+                    <p>Практики осознанности, которые помогут оставаться в настоящем моменте и снизить тревожность.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="meditation-section" id="meditation">
+        <div class="container">
+            <h2 class="section-title">Дыхательная медитация</h2>
+            <div class="meditation-container">
+                <div class="meditation-content">
+                    <h3>Упражнение "Глубокое дыхание"</h3>
+                    <p>Эта простая техника поможет вам быстро успокоиться в стрессовой ситуации. Сосредоточьтесь на своем дыхании и следуйте инструкциям:</p>
+                    <ol>
+                        <li>Сядьте удобно, выпрямите спину</li>
+                        <li>Закройте глаза и сделайте медленный глубокий вдох через нос на 4 счета</li>
+                        <li>Задержите дыхание на 4 счета</li>
+                        <li>Медленно выдохните через рот на 6 счетов</li>
+                        <li>Повторите цикл 5-10 раз</li>
+                    </ol>
+                    <p>Следите за анимацией справа - она поможет вам синхронизировать дыхание с правильным ритмом.</p>
+                    <a href="#" class="btn">Больше медитаций</a>
+                </div>
+                <div class="meditation-visual">
+                    <div class="breathing-circle">
+                        <div class="inner-circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="quote-section">
+        <div class="container">
+            <div class="quote">"Спокойствие — это не отсутствие конфликта, а способность сохранять мир внутри себя независимо от внешних обстоятельств."</div>
+            <div class="author">— Неизвестный автор</div>
+        </div>
+    </section>
+
+    <section id="techniques">
+        <div class="container">
+            <h2 class="section-title">Техники для спокойствия</h2>
+            <div class="techniques">
+                <div class="technique-card">
+                    <div class="technique-img">Прогрессивная релаксация</div>
+                    <div class="technique-content">
+                        <h3>Мышечная релаксация</h3>
+                        <p>Метод последовательного напряжения и расслабления различных групп мышц для снятия физического и психического напряжения.</p>
+                        <a href="#" class="btn">Изучить</a>
+                    </div>
+                </div>
+                <div class="technique-card">
+                    <div class="technique-img">Визуализация</div>
+                    <div class="technique-content">
+                        <h3>Создание ментального убежища</h3>
+                        <p>Использование воображения для создания спокойного и безопасного места в своем сознании, куда можно "уйти" в стрессовые моменты.</p>
+                        <a href="#" class="btn">Изучить</a>
+                    </div>
+                </div>
+                <div class="technique-card">
+                    <div class="technique-img">Медитация осознанности</div>
+                    <div class="technique-content">
+                        <h3>Практика присутствия</h3>
+                        <p>Навык фокусировки на настоящем моменте без осуждения, который помогает снизить тревогу о будущем и сожаление о прошлом.</p>
+                        <a href="#" class="btn">Изучить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>О нас</h3>
+                    <p>Мы помогаем людям обрести внутренний покой и гармонию через простые и доступные практики.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Быстрые ссылки</h3>
+                    <ul>
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#about">О спокойствии</a></li>
+                        <li><a href="#meditation">Медитация</a></li>
+                        <li><a href="#techniques">Техники</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li>Email: яспокспок@spokoistvie.ru</li>
+                        <li>Телефон: +7 (999) 123-45-67</li>
+                        <li>Адрес: Москва, ул. Спокойная, д. 7</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Оазис Спокойствия. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Простая анимация для дыхательного круга
+        document.addEventListener('DOMContentLoaded', function() {
+            const breathingCircle = document.querySelector('.breathing-circle');
+            let isBreathing = true;
+            
+            // Функция для изменения размера круга
+            function animateBreathing() {
+                if (isBreathing) {
+                    breathingCircle.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        breathingCircle.style.transform = 'scale(1)';
+                    }, 4000);
+                }
+            }
+            
+            // Запуск анимации
+            setInterval(animateBreathing, 8000);
+            animateBreathing();
+            
+            // Плавная прокрутка для якорных ссылок
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
